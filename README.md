@@ -15,5 +15,5 @@ The script presents you with two options:
 * override the `~/.tmux.conf`
 * keep it but moving it to other name (appending `.old` to it)
 
-> **IMPORTANT NOTE**: IF THERE'S ALREADY A `.tmux.conf.old` IT WILL BE OVERRIDE.  
+> **IMPORTANT NOTE**: IF THERE'S ALREADY A `.tmux.conf.old` IT WILL BE OVERRIDEN.  
 > I'LL ADD THIS FUNCTIONALITY SOON I HOPE.
