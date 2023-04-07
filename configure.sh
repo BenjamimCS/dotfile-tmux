@@ -13,11 +13,13 @@ else
   echo -e "\e[32m=> \e[34m\e]8;;https://github.com/tmux-plugins/tpm\atpm\e]8;;\a\e[0m already installed"
 fi
 
-echo -e  "Override \e[37;4m.tmux.conf\e[0m? "
-echo -e  "\e[32mTIP:\e[0m Case doesn't matter"
-echo -en "\e[30m[ \e[33mY \e[30mor \e[33myes \e[30mor | \e[33mN \e[30mor \e[33mNo \e[30m]\e[33m "
-read confirm
-confirm=`echo $confirm | tr [:upper:] [:lower:]`
+if [ -e "${HOME}/.tmux.conf" ]; then
+  echo -e  "Override \e[37;4m.tmux.conf\e[0m? "
+  echo -e  "\e[32mTIP:\e[0m Case doesn't matter"
+  echo -en "\e[30m[ \e[33mY \e[30mor \e[33myes \e[30m | \e[33mN \e[30mor \e[33mNo \e[30m]\e[33m "
+  read confirm
+  confirm=`echo $confirm | tr [:upper:] [:lower:]`
+fi
 
 echo -e '\e[32m=> Add \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
 case $confirm in
