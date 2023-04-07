@@ -1,10 +1,29 @@
 #! /bin/bash
 # TODO:
-#  * feature: if there's already .tmux.conf.old, 
-#    append .1 and forth to the actual .conf
-#    e.g.: .tmux.conf.old already exists, so
-#          append .1 to .tmux.conf .tmux.conf.1
 #  * option: symbolic link the tmux.conf
+
+# newer the file, higher the right mose number
+# i.g.: there's .tmux.conf and .tmux.conf.1,
+# .tmux.conf becomes .tmux.conf.2
+function no_override {
+  if ! [ -e ~/.tmux.conf.old ]; then
+    cp ~/.tmux.conf ~/.tmux.conf.old
+    exit
+  fi
+
+  if ! ls ~/.tmux.conf.old.* > /dev/null 2>&1; then
+    cp ~/.tmux.conf ~/.tmux.conf.old.1
+    exit
+  fi
+
+  greater="`ls -1 ~/.tmux.conf.old.* |\
+                 xargs -n1 basename |\
+                 grep -o '[0-9]\+' |\
+                 sort -r  |\
+                 head -n1`"
+  number=$(($greater + 1))
+  cp ./tmux.conf ~/.tmux.conf.old.${number}
+}
 
 if ! [ -e "${HOME}/.tmux/plugins/tpm" ]; then
   echo -e "\e[32m=> Install \e[34m\e]8;;https://github.com/tmux-plugins/tpm\atpm\e]8;;\a\e[0m"
@@ -26,9 +45,7 @@ case $confirm in
   y | yes)
     cat tmux.conf > ~/.tmux.conf;;
   n | no)
-    cp ~/.tmux.conf ~/.tmux.conf.old
-    cat tmux.conf > ~/.tmux.conf
-    ;;
+    no_override;;
   *)
     cat tmux.conf > ~/.tmux.conf;;
 esac
