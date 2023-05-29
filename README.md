@@ -1,6 +1,4 @@
 # Tmux dotfile
-:toc:
-
 ## Usage
 To use it's straight simple. Run:
 ```
