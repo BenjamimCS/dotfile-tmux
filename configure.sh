@@ -5,6 +5,8 @@
 # newer the file, higher the right mose number
 # i.g.: there's .tmux.conf and .tmux.conf.1,
 # .tmux.conf becomes .tmux.conf.2
+message='\e[32m=> Add \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
+
 function no_override {
   if ! [ -e ~/.tmux.conf.old ]; then
     cp ~/.tmux.conf ~/.tmux.conf.old
@@ -40,11 +42,12 @@ if [ -e "${HOME}/.tmux.conf" ]; then
   confirm=`echo $confirm | tr [:upper:] [:lower:]`
 fi
 
-echo -e '\e[32m=> Add \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
 case $confirm in
   y | yes)
+    echo -e ${message}
     cat tmux.conf > ~/.tmux.conf;;
   n | no)
+    echo -e ${message}
     no_override;;
   *)
     cat tmux.conf > ~/.tmux.conf;;
