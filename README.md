@@ -9,6 +9,7 @@ git clone --depth 1 --no-single-branch https://github.com/BenjamimCS/dotfile-tmu
 ```
 The script will make the things for you.
 
-The script presents you with two options:
+The script presents you three options:
 * override the `~/.tmux.conf`
 * keep it but moving it to other name (appending `.old` to it)
+* or cancel it
