@@ -16,12 +16,14 @@ function go_off {
 function no_override {
   if ! [ -e ~/.tmux.conf.old ]; then
     cp ~/.tmux.conf ~/.tmux.conf.old
-    exit
+    cat tmux.conf > ~/.tmux.conf;
+    return
   fi
 
   if ! ls ~/.tmux.conf.old.* > /dev/null 2>&1; then
     cp ~/.tmux.conf ~/.tmux.conf.old.1
-    exit
+    cat tmux.conf > ~/.tmux.conf;
+    return
   fi
 
   greater="`ls -1 ~/.tmux.conf.old.* |\
@@ -31,6 +33,7 @@ function no_override {
                  head -n1`"
   number=$(($greater + 1))
   cp ./tmux.conf ~/.tmux.conf.old.${number}
+  cat tmux.conf > ~/.tmux.conf;
 }
 
 if ! [ -e "${HOME}/.tmux/plugins/tpm" ]; then
@@ -55,8 +58,6 @@ case $confirm in
   n | no)
     echo -e ${message}
     no_override;;
-  cancel)
+  cancel | *)
     go_off;;
-  *)
-    cat tmux.conf > ~/.tmux.conf;;
 esac
