@@ -10,7 +10,7 @@ trap go_off INT
 
 function go_off {
   echo -e "\e[35m\nOperation canceled. Going off Zzzz\e[0m"
-  exit 1
+  exit
 }
 
 function no_override {
