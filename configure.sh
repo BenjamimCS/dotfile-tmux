@@ -5,8 +5,25 @@
 # newer the file, higher the right mose number
 # i.g.: there's .tmux.conf and .tmux.conf.1,
 # .tmux.conf becomes .tmux.conf.2
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 message='\e[32m=> Add \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
 trap go_off INT
+
+function is_safe {
+  if [[ $SCRIPTPATH == $PWD ]]; then
+    return 0
+  fi
+  return 1
+}
+
+function write_file {
+  if is_safe; then
+    cat tmux.conf > ~/.tmux.conf
+    return
+  fi
+
+  cat "${SCRIPTPATH}/tmux.conf" > ~/.tmux.conf
+}
 
 function go_off {
   echo -e "\e[35m\nOperation canceled. Going off Zzzz\e[0m"
@@ -54,7 +71,7 @@ fi
 case $confirm in
   y | yes)
     echo -e ${message}
-    cat tmux.conf > ~/.tmux.conf;;
+    write_file
   n | no)
     echo -e ${message}
     no_override;;
