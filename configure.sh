@@ -2,8 +2,9 @@
 # TODO:
 #  * option: symbolic link the tmux.conf
 
-# newer the file, higher the right mose number
 # i.g.: there's .tmux.conf and .tmux.conf.1,
+# newer the file, higher the right-most number
+# i.g.: there are .tmux.conf and .tmux.conf.1,
 # .tmux.conf becomes .tmux.conf.2
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 trap go_off INT
