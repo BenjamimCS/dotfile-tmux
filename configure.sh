@@ -6,7 +6,6 @@
 # i.g.: there's .tmux.conf and .tmux.conf.1,
 # .tmux.conf becomes .tmux.conf.2
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-message='\e[32m=> Add \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
 trap go_off INT
 
 function is_safe {
@@ -70,10 +69,10 @@ fi
 
 case $confirm in
   y | yes)
-    echo -e ${message}
+    echo -e '\e[32m=> Override \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
     write_file;;
   n | no)
-    echo -e ${message}
+    echo -e '\e[32m=> Add \e[37;4m.tmux.conf\e[0m\e[32m file in \e[33m$HOME\e[30m'
     no_override;;
   cancel | *)
     go_off;;
