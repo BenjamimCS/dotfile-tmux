@@ -66,6 +66,11 @@ if [ -e "${HOME}/.tmux.conf" ]; then
   echo -en "\e[30m[ \e[33mY \e[30mor \e[33myes \e[30m | \e[33mN \e[30mor \e[33mNo \e[30m] | \e[35m[Cancel or ^c]\e[33m "
   read confirm
   confirm=`echo $confirm | tr [:upper:] [:lower:]`
+else
+  echo -e '\e[32m=> \e[37mNo \e[33m~/.tmux.conf\e[37m found\e[0m'
+  write_file
+  echo -e '\e[32m=> \e[33m~/.tmux.conf\e[37m added succesfully\e[0m'
+  exit 0
 fi
 
 case $confirm in
